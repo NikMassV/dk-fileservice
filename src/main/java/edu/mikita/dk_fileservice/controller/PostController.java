@@ -15,10 +15,10 @@ public class PostController {
         this.fileService = fileService;
     }
 
-    @GetMapping("/form.html")
+    @GetMapping("/form")
     public String showForm(Model model) {
         model.addAttribute("post", new PostDto(null, null));
-        return "form.html";
+        return "form";
     }
 
     @GetMapping("/payload")
@@ -28,7 +28,7 @@ public class PostController {
         return "payload";
     }
 
-    @PostMapping("/form.html")
+    @PostMapping("/form")
     public String submitForm(PostDto post) {
         fileService.writeToFile(post);
         return "redirect:/success";
