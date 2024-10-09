@@ -1,0 +1,47 @@
+package edu.mikita.dk_fileservice.controller;
+
+import edu.mikita.dk_fileservice.domain.PostDto;
+import edu.mikita.dk_fileservice.service.FileService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+public class PostController {
+    private final FileService fileService;
+
+    public PostController(FileService fileService) {
+        this.fileService = fileService;
+    }
+
+    @GetMapping("/form.html")
+    public String showForm(Model model) {
+        model.addAttribute("post", new PostDto(null, null));
+        return "form.html";
+    }
+
+    @GetMapping("/payload")
+    public String showPayload(Model model) {
+        String payload = fileService.readFromFile();
+        model.addAttribute("payload", payload);
+        return "payload";
+    }
+
+    @PostMapping("/form.html")
+    public String submitForm(PostDto post) {
+        fileService.writeToFile(post);
+        return "redirect:/success";
+    }
+
+    @GetMapping("/success")
+    public String showSuccess() {
+        return "success";
+    }
+
+    @GetMapping("/exit")
+    public String exit() {
+        System.exit(1);
+        return null;
+    }
+}
