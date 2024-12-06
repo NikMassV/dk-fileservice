@@ -6,3 +6,10 @@ Run container:
 
 Check volumes:
 -docker volume ls
+
+Publish to Docker Hub:
+- docker tag fileservice:latest nikmassv/fileservice:latest
+- docker push nikmassv/fileservice:latest
+
+Apply K8s configuration: 
+- kubectl apply -f fileservice-deployment.yaml  -f fileservice-service.yaml
