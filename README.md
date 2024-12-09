@@ -12,4 +12,4 @@ Publish to Docker Hub:
 - docker push nikmassv/fileservice:latest
 
 Apply K8s configuration: 
-- kubectl apply -f fileservice-deployment.yaml  -f fileservice-service.yaml
+- kubectl apply -f fileservice-deployment.yaml -f fileservice-service.yaml -f local-volume.yaml -f local-volume-claim.yaml
